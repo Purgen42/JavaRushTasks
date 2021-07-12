@@ -15,7 +15,7 @@ public class Solution {
 //        System.out.println(logParser.getLoggedUsers(null, null));
 //        System.out.println(logParser.getDownloadedPluginUsers(null, null));
 
-        System.out.println(logParser.getNumberOfAttemptToSolveTask(13, null, null));
+        System.out.println(logParser.execute("get ip for event = \"WRITE_MESSAGE\""));
 
 
     }

@@ -1,9 +1,6 @@
 package com.javarush.task.task39.task3913;
 
-import com.javarush.task.task39.task3913.query.DateQuery;
-import com.javarush.task.task39.task3913.query.EventQuery;
-import com.javarush.task.task39.task3913.query.IPQuery;
-import com.javarush.task.task39.task3913.query.UserQuery;
+import com.javarush.task.task39.task3913.query.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -15,10 +12,14 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery {
+public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQuery {
     class Record {
         String ip;
         String username;
@@ -50,7 +51,7 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery {
     }
 
     private ArrayList<Record> parseResult;
-
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 
     private List<String> readLines(Path path) {
         try {
@@ -75,7 +76,7 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery {
             e.printStackTrace();
         }
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+
 
         for (String line : lines) {
 //            System.out.println(line);
@@ -383,5 +384,91 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery {
     @Override
     public Map<Integer, Integer> getAllDoneTasksAndTheirNumber(Date after, Date before) {
         return getTasksAndTheirNumberForEvent(Event.DONE_TASK, after, before);
+    }
+
+    @Override
+    public Set<Object> execute(String query) {
+        Pattern pattern = Pattern.compile("get\\s+(ip|user|date|event|status)" +
+                "(\\s+for\\s+(ip|user|date|event|status)\\s*=\\s*\\\"(.*?)\\\"" +
+                "\\s*(and\\s+date\\s+between\\s*\\\"(.*?)\\\"\\s*and\\s*\\\"(.*?)\\\")?)?", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(query.trim());
+        if (!matcher.find()) return null;
+        Function<Record, Object> mapFunction;
+        Predicate<Record> filterFunction;
+        Stream<Record> sourceStream = Stream.empty();
+
+        if (matcher.group(5) == null) {
+            sourceStream = parseResult.stream();
+        }
+        else {
+            sourceStream = parseResult.stream()
+                    .filter(r -> {
+                        try {
+                            return r.date.after(dateFormat.parse(matcher.group(6))) && r.date.before(dateFormat.parse(matcher.group(7)));
+                        } catch (ParseException e) {
+                            return false;
+                        }
+                    });
+        }
+
+        String param = matcher.group(1).toLowerCase();
+
+        switch (param) {
+            case "ip":
+                mapFunction = r -> r.ip;
+                break;
+            case "user":
+                mapFunction = r -> r.username;
+                break;
+            case "date":
+                mapFunction = r -> r.date;
+                break;
+            case "event":
+                mapFunction = r -> r.event;
+                break;
+            case "status":
+                mapFunction = r -> r.status;
+                break;
+            default:
+                return null;
+        }
+        if (matcher.group(3) == null) return sourceStream
+                .map(mapFunction)
+                .collect(Collectors.toSet());
+
+        String condition = matcher.group(3).toLowerCase();
+        String value = matcher.group(4);
+
+        switch (condition) {
+            case "ip":
+                filterFunction = r -> r.ip.equals(value);
+                break;
+            case "user":
+                filterFunction = r -> r.username.equals(value);
+                break;
+            case "date":
+                filterFunction = r -> {
+                    try {
+                        return r.date.equals(dateFormat.parse(value));
+                    } catch (ParseException e) {
+                        return false;
+                    }
+                };
+                break;
+            case "event":
+                filterFunction = r -> r.event == Event.valueOf(value);
+                break;
+            case "status":
+                filterFunction = r -> r.status == Status.valueOf(value);
+                break;
+            default:
+                return null;
+        }
+
+        return sourceStream
+                .filter(filterFunction)
+                .map(mapFunction)
+                .collect(Collectors.toSet());
+
     }
 }
