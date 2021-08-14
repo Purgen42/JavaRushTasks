@@ -1,0 +1,26 @@
+<component name="libraryTable">
+  <library name="apache.httpcomponents.client5.httpclient5" type="repository">
+    <properties maven-id="org.apache.httpcomponents.client5:httpclient5:5.1" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../../JDK/httpclient5-5.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../JDK/httpcore5-5.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../JDK/httpcore5-h2-5.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../JDK/slf4j-api-1.7.25.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../JDK/commons-codec-1.15.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../../JDK/httpclient5-5.1-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../JDK/httpcore5-5.1.1-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../JDK/httpcore5-h2-5.1.1-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../JDK/slf4j-api-1.7.25-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../JDK/commons-codec-1.15-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../../JDK/httpclient5-5.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../JDK/httpcore5-5.1.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../JDK/httpcore5-h2-5.1.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../JDK/slf4j-api-1.7.25-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../JDK/commons-codec-1.15-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="apache.httpcomponents.core5.httpcore5" type="repository">
+    <properties maven-id="org.apache.httpcomponents.core5:httpcore5:5.1.1" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../../JDK/httpcore5-5.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../../JDK/httpcore5-5.1.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../../JDK/httpcore5-5.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

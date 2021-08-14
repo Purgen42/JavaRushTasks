@@ -9,10 +9,17 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="guava-30.1.1-jre" level="project" />
     <orderEntry type="library" name="commons-collections4-4" level="project" />
-    <orderEntry type="library" name="java" level="project" />
+    <orderEntry type="library" name="commons-collections4-4.4-src" level="project" />
     <orderEntry type="library" name="org.hamcrest:hamcrest-core:2.2" level="project" />
     <orderEntry type="library" name="junit-4.11" level="project" />
     <orderEntry type="library" name="org.powermock:powermock-core:1.6.6" level="project" />
     <orderEntry type="library" name="org.jsoup:jsoup:1.9.2" level="project" />
+    <orderEntry type="library" name="java1" level="project" />
+    <orderEntry type="library" name="examples" level="project" />
+    <orderEntry type="library" name="apache.httpcomponents.client5.httpclient5" level="project" />
+    <orderEntry type="library" name="apache.httpcomponents.httpclient" level="application" />
+    <orderEntry type="library" name="apache.httpcomponents.httpcore" level="application" />
+    <orderEntry type="library" name="javax.mail.api" level="project" />
+    <orderEntry type="library" name="javax.activation" level="project" />
   </component>
 </module>
